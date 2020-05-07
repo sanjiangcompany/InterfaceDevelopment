@@ -35,8 +35,8 @@ class GetGuestListTest(unittest.TestCase):
         self.result = r.json()
         self.assertEqual(self.result['status'], 200)
         self.assertEqual(self.result['message'], 'success')
-        self.assertEqual(self.result['data'][0]['realname'],'alen')
-        self.assertEqual(self.result['data'][0]['phone'],'13511001100')
+        self.assertEqual(self.result['data'][0]['real_name'],'tom')
+        self.assertEqual(self.result['data'][0]['phone'],'13511001199')
 
     def test_get_event_list_eid_phone_null(self):
         ''' 根据 eid 和phone 查询结果为空 '''
@@ -51,7 +51,7 @@ class GetGuestListTest(unittest.TestCase):
         self.result = r.json()
         self.assertEqual(self.result['status'], 200)
         self.assertEqual(self.result['message'], 'success')
-        self.assertEqual(self.result['data']['realname'],'alen')
+        self.assertEqual(self.result['data']['real_name'], 'alen')
         self.assertEqual(self.result['data']['phone'],'13511001100')
 
 

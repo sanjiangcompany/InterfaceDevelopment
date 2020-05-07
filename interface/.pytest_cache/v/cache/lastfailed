@@ -1,0 +1,5 @@
+{
+  "add_event_test.py::AddEventTest::test_add_event_data_type_error": true,
+  "add_event_test.py::AddEventTest::test_add_event_success": true,
+  "user_sign_test.py::UserSignTest::test_user_sign_success": true
+}

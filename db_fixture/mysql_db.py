@@ -1,11 +1,13 @@
 # coding=utf8
 import pymysql.cursors
 import os
+from os.path import abspath, dirname
 import configparser as cparser
 
 
 # ======== Reading db_config.ini setting ===========
-base_dir = str(os.path.dirname(os.path.dirname(__file__)))
+base_dir = dirname(dirname(abspath(__file__)))
+
 base_dir = base_dir.replace('\\', '/')
 file_path = base_dir + "/db_config.ini"
 
@@ -17,6 +19,7 @@ port = cf.get("mysqlconf", "port")
 db   = cf.get("mysqlconf", "db_name")
 user = cf.get("mysqlconf", "user")
 password = cf.get("mysqlconf", "password")
+
 
 
 # ======== MySql base operating ===================
@@ -35,6 +38,7 @@ class DB:
         except pymysql.err.OperationalError as e:
             print("Mysql Error %d: %s" % (e.args[0], e.args[1]))
 
+    # 数据初始化：1、清空表， 2、插入数据
     # clear table data
     def clear(self, table_name):
         # real_sql = "truncate table " + table_name + ";"
@@ -52,7 +56,6 @@ class DB:
         value = ','.join(table_data.values())
         real_sql = "INSERT INTO " + table_name + " (" + key + ") VALUES (" + value + ")"
         #print(real_sql)
-
         with self.connection.cursor() as cursor:
             cursor.execute(real_sql)
 
@@ -73,12 +76,18 @@ class DB:
 
 if __name__ == '__main__':
 
-    db = DB()
+    # 这只是测试的，其它文件调用时不会被执行
+    db = DB()  # ROM
     table_name = "sign_event"
-    data = {'id':1,'name':'红米','`limit`':2000,'status':1,'address':'北京会展中心','start_time':'2016-08-20 00:25:42'}
-    table_name2 = "sign_guest"
-    data2 = {'realname':'alen','phone':12312341234,'email':'alen@mail.com','sign':0,'event_id':1}
-
+    data = {'id':1,'name':'红米','`limit`':2000,'status':1,
+            'address':'北京会展中心','start_time': '2018-08-20 00:25:42'}
     db.clear(table_name)
     db.insert(table_name, data)
+
+    table_name2 = "sign_guest"
+    data2 = {'realname':'alen','phone':12312341234,
+             'email':'alen@mail.com','sign':0,'event_id':1}
+
+    db.clear(table_name2)
+    db.insert(table_name2, data2)
     db.close()

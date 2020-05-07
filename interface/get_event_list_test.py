@@ -27,7 +27,7 @@ class GetEventListTest(unittest.TestCase):
         ''' 根据 eid 查询结果成功 '''
         r = requests.get(self.base_url, params={'eid':1})
         self.result = r.json()
-        self.assertEqual(self.result['status'], 200)
+        self.assertEqual(self.result['status'], 2000)
         self.assertEqual(self.result['message'], 'success')
         self.assertEqual(self.result['data']['name'],u'红米Pro发布会')
         self.assertEqual(self.result['data']['address'],u'北京会展中心')
@@ -43,7 +43,7 @@ class GetEventListTest(unittest.TestCase):
         ''' 关键字‘发布会’模糊查询 '''
         r = requests.get(self.base_url, params={'name':'发布会'})
         self.result = r.json()
-        self.assertEqual(self.result['status'], 200)
+        self.assertEqual(self.result['status'], 2000)
         self.assertEqual(self.result['message'], 'success')
         self.assertEqual(self.result['data'][0]['name'],u'红米Pro发布会')
         self.assertEqual(self.result['data'][0]['address'],u'北京会展中心')

@@ -6,14 +6,15 @@ except ImportError:
     from .mysql_db import DB
 
 # 定义过去时间
-past_time = time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(time.time()-100000))
+past_time = time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(time.time()-1000000))
+
 
 # 定义将来时间
-future_time = time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(time.time()+10000))
+future_time = time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(time.time()+100000))
 
 
 
-# create data
+# create data 定义要创建的数据
 datas = {
     'sign_event':[
         {'id':1,'name':'红米Pro发布会','`limit`':2000,'status':1,'address':'北京会展中心','start_time':future_time},
@@ -31,9 +32,9 @@ datas = {
 
 
 # Inster table datas
-def init_data():
+def create_data():
     DB().init_data(datas)
 
 
 if __name__ == '__main__':
-    init_data()
+    create_data()
